@@ -5,7 +5,7 @@
 
 void imprimir(Graph G)
 {
-    for (int v = 1; v <= G->V; v++)
+    for (int v = 0; v < G->V; v++)
     {
         if (G->adj[v] == NULL)
             return;
@@ -25,7 +25,8 @@ int main()
     int tam;
     scanf("%d", &tam);
     Graph G = initGraph(tam);
-    int i = 1, adj, node;
+    int adj, node, source;
+    scanf("%d", &source);
     
     // for (i; i <= tam; i++) {
     //     scanf("%d", &qtde_nodes);
@@ -38,7 +39,7 @@ int main()
     //     }
     // }
 
-    while ((scanf("%d", &adj)) != 1) {
+    while ((scanf("%d", &adj)) == 1) {
         scanf("%d", &node);
         insertArc(G, adj, node);
     }
@@ -63,11 +64,11 @@ int main()
     // insertArc(G, 5, 4);
 
     imprimir(G);
-    BFS(G, 1);
+    BFS(G, source);
 
-    for (int i = 1; i <= G->V; i++) {
-        // printf("Lista pais: %d ", G->pai[i]);
-        printf("%d ", G->dist[i]);
+    for (int i = 0; i < G->V; i++) {
+        printf("Pai do %d: %d ", i, G->pai[i]);
+        printf("Distancia do %i ao %d: %d ", i, source, G->dist[i]);
         puts("");
     }
 

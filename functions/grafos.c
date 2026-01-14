@@ -16,11 +16,11 @@ Graph initGraph(int V)
     Graph G = malloc(sizeof(struct graph));
     G->V = V;
     G->E = 0;
-    G->adj = malloc((V + 1) * sizeof(link));
-    G->cores = malloc((V + 1) * sizeof(cor));
-    G->dist = malloc((V + 1) * sizeof(int));
-    G->pai = malloc((V + 1) * sizeof(int));
-    for (int i = 1; i <= G->V; ++i)
+    G->adj = malloc(V * sizeof(link));
+    G->cores = malloc(V * sizeof(cor));
+    G->dist = malloc(V * sizeof(int));
+    G->pai = malloc(V * sizeof(int));
+    for (int i = 0; i < G->V; ++i)
     {
         G->adj[i] = NULL;
     }
@@ -41,7 +41,7 @@ void insertArc(Graph G, vertex v, vertex w)
 
 Graph BFS(Graph G, int s)
 {
-    for (int v = 1; v <= G->V; v++)
+    for (int v = 0; v < G->V; v++)
     {
         G->cores[v] = s != v ? branco : cinza;
         G->dist[v] = 0;
@@ -68,5 +68,6 @@ Graph BFS(Graph G, int s)
         }
         G->cores[u_index] = preto;
     }
+    free(Q);
     return G;
 }
